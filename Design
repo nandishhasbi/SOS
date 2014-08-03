@@ -1,0 +1,101 @@
+
+Rest
+API's for User :
+(contact,name) -> Register
+(userID,LocationInfo) -> fire N forget
+(userID,LocationInfo,Message)-> fire N forget
+
+API's for Authorities
+(name, number) -> Regsiter
+(AuthorityID,LocationInfo) -> fire N Forget
+(AuthorityID,userID,LocationInfo,Message) -> fire N Forget
+==========================================================================================
+==========================================================================================
+Database
+==========================================================================================
+Usertable
+	userID
+	Name
+	Contact
+==========================================================================================	
+AuthorityTable
+	authorityID
+	Name
+	Details
+==========================================================================================
+ProximityTable
+	authorityID
+	currentLocationInfo
+==========================================================================================
+TempTable
+	userID
+	userMessage
+	AuthorityID
+	seen?
+	locationInfo
+==========================================================================================
+==========================================================================================
+												-----> User View
+Database <-> REST Backend <-> Android app  -----
+												-----> Authority View
+==========================================================================================
+==========================================================================================	
+Workflows
+==========================================================================================
+1. User Registration
+** Have to associate each registration with id and these will be perm id for the user
+	i.e. How to uniquely identify each instance of the app or should it be done at
+		 the backend and returned to the app: ??HARSHA
+GOTO User view : 
+	1. Enter phone number , name 
+	2. Send it to Backend
+	3. ?? Associate id with the user
+	4. Authorize the phone number provided[ like whatsapp does]
+==========================================================================================	
+2. Authority Registration
+** Same problem as above
+GOTO Authority View :
+	1. Enter details
+	2. send to backend
+	3. ?? associate id with the authority user
+==========================================================================================	
+3. User in distress triggers our app
+** determine the most easy way to trigger this.
+Neccessity: Ensure its doable in basic phones
+		a. Provide multiple options:
+			PROS :
+				1. Flexiblity will help people pick the ones which they find easy to operate
+				2. Multiple ways ensures back up methods to trigger in worst case scenarios
+			CONS :
+				1. Might make the user confused
+				2. User may not lock down one way of trigger, and hence may not remember
+				   how to trigger the app in distress
+		b. Provide a single easy way to do it:
+			PROS :
+				1. Ensures user will learn or rem one way to trigger the app 
+			CONS :
+				1. "Easy" is subjective. may not be the same for all
+On Trigger
+	1. Location is picked up
+	2. Location and userID are sent to backend
+	3. user contact is picked up
+	4. Locations is used to find the authority in close proximity
+	5. Push userinfo(location & contact ) to Closest N Authorities
+	6. Created a tempTable records with userID and AuthorityID's the message is pushed to
+	** [Feature] We might want the user to provide few contacts to which to trigger the same info??
+	6. GOTO use case 5
+==========================================================================================
+4. Authority recieves push notification of distress call
+
+On recieving :
+	1. send [Message seen] to backend.
+	2. Backend updates temp table with 	details if seen
+==========================================================================================	
+5. Regular Authoirty Update
+
+Every 5-15 min:
+	1. Send location , AuthorityID to backend
+	2. Updated table with locationinfo of authorityID
+==========================================================================================
+==========================================================================================	
+				
