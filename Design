@@ -1,14 +1,14 @@
 
 Rest
 API's for User :
-(contact,name) -> Register
+(contact,name) -> Register          ->(nhasbi)An image? To recognise who the person who has asked for help, might be helpful?
 (userID,LocationInfo) -> fire N forget
 (userID,LocationInfo,Message)-> fire N forget
 
-API's for Authorities
-(name, number) -> Regsiter
-(AuthorityID,LocationInfo) -> fire N Forget
-(AuthorityID,userID,LocationInfo,Message) -> fire N Forget
+API's for Authorities               -> (nhasbi)Authorities are just the policemen? Can we give an option to people who can register to save, for e.g. People who register for "Be a friend and Save", will be notified immediately when there is a distress in vicinity. And they can make a decision themself?
+(name, number) -> Regsiter          -> (nhasbi)An image? To recognise who the person who has asked for help, might be helpful?
+(AuthorityID,LocationInfo) -> fire N Forget  -> (nhasbi)Why cant we save the authority id? We might use it in future as a shield against them and probably to achieve more transparency? 
+(AuthorityID,userID,LocationInfo,Message) -> fire N Forget ->(nhasbi) And also the location info?
 ==========================================================================================
 ==========================================================================================
 Database
@@ -46,11 +46,14 @@ Workflows
 ** Have to associate each registration with id and these will be perm id for the user
 	i.e. How to uniquely identify each instance of the app or should it be done at
 		 the backend and returned to the app: ??HARSHA
+		 (nhasbi) -> I feel the phone number used will itself serve as a potential id. Just like whatsapp. 
 GOTO User view : 
 	1. Enter phone number , name 
 	2. Send it to Backend
 	3. ?? Associate id with the user
 	4. Authorize the phone number provided[ like whatsapp does]
+	
+	(nhasbi)-> This is good (y). 
 ==========================================================================================	
 2. Authority Registration
 ** Same problem as above
@@ -61,8 +64,8 @@ GOTO Authority View :
 ==========================================================================================	
 3. User in distress triggers our app
 ** determine the most easy way to trigger this.
-Neccessity: Ensure its doable in basic phones
-		a. Provide multiple options:
+Neccessity: Ensure its doable in basic phones -> (nhasbi)-> This is a must, considering the fact that not everyone uses smartphones
+		a. Provide multiple options: (nhasbi)-> We can discuss this. 
 			PROS :
 				1. Flexiblity will help people pick the ones which they find easy to operate
 				2. Multiple ways ensures back up methods to trigger in worst case scenarios
@@ -70,11 +73,12 @@ Neccessity: Ensure its doable in basic phones
 				1. Might make the user confused
 				2. User may not lock down one way of trigger, and hence may not remember
 				   how to trigger the app in distress
-		b. Provide a single easy way to do it:
+		b. Provide a single easy way to do it:(nhasbi)-> A single way doesnt sound good. 
 			PROS :
 				1. Ensures user will learn or rem one way to trigger the app 
 			CONS :
 				1. "Easy" is subjective. may not be the same for all
+     (nhasbi)-> c. Send a message to a family member, who in turn can call the policemen again. Two layer of security, if the first one fails. 
 On Trigger
 	1. Location is picked up
 	2. Location and userID are sent to backend
